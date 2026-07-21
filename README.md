@@ -4,6 +4,10 @@ A tiny [Claude Code](https://claude.com/claude-code) skill that makes Claude int
 
 LLMs fill ambiguity with assumptions. `/twq` forces the questions up front, so the decisions are yours instead of the model's guesses.
 
+![Invoking the skill: "/twq Refactor the welcome page." typed at the Claude Code prompt](demo.png)
+
+*Prefix any task with `/twq` — Claude studies it, asks its questions, then does the work.*
+
 ## Install
 
 The skill is a single `SKILL.md` file. Put it in a folder named `twq` inside your Claude Code skills directory.
