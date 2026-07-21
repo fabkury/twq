@@ -24,7 +24,31 @@ New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills\twq" | Out-
 Copy-Item twq\SKILL.md "$env:USERPROFILE\.claude\skills\twq\"
 ```
 
-That installs it *personally* — available in all your projects. To share it with collaborators on one specific project instead, place it at `<project>/.claude/skills/twq/SKILL.md` and commit it.
+### Alternative: link instead of copy
+
+If you'd rather have the skill update with a plain `git pull`, keep the clone wherever you like and link your skills folder to it instead of copying:
+
+**macOS / Linux (symlink):**
+
+```sh
+git clone https://github.com/fabkury/twq
+mkdir -p ~/.claude/skills
+ln -s "$(pwd)/twq" ~/.claude/skills/twq
+```
+
+**Windows (PowerShell, NTFS junction — no admin rights needed):**
+
+```powershell
+git clone https://github.com/fabkury/twq
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills" | Out-Null
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.claude\skills\twq" -Target "$PWD\twq"
+```
+
+Claude Code only reads `SKILL.md`, so the repo's other files (`README.md`, `LICENSE`, `.git`) showing up through the link are harmless. Updating is just `git pull` inside the clone — and if you tweak the skill, your edits are live immediately.
+
+### Scope
+
+Either method installs the skill *personally* — available in all your projects. To share it with collaborators on one specific project instead, place it at `<project>/.claude/skills/twq/SKILL.md` and commit it.
 
 ## Use
 
